@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         知乎美化
-// @version      1.5.23
+// @version      1.5.23.1
 // @author       X.I.U
 // @description  宽屏显示、暗黑模式（4种）、暗黑模式跟随浏览器、屏蔽首页活动广告、隐藏文章开头大图、调整图片最大高度、向下翻时自动隐藏顶栏
 // @match        *://www.zhihu.com/*
@@ -527,7 +527,7 @@ html {filter: brightness(65%) sepia(30%) !important; background-image: url();}
 
     // 获取知乎 Cookie 中的主题类型
     function getTheme() {
-        let name = 'theme=',
+        let name = 'themeApp=',
             ca = document.cookie.split(';');
         for (let i=0; i<ca.length; i++) {
             let c = ca[i].trim();
@@ -540,12 +540,12 @@ html {filter: brightness(65%) sepia(30%) !important; background-image: url();}
     function setTheme(theme) {
         switch(theme) {
             case 'light':
-                document.cookie='theme=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+                document.cookie='themeApp=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.zhihu.com';
                 document.lastChild.setAttribute('data-theme', 'light');
                 location.reload(); // 刷新网页
                 break;
             case 'dark':
-                document.cookie='theme=dark; expires=Thu, 18 Dec 2031 12:00:00 GMT; path=/';
+                document.cookie='themeApp=dark; expires=Thu, 18 Dec 2031 12:00:00 GMT; path=/; domain=.zhihu.com';
                 document.lastChild.setAttribute('data-theme', 'dark');
                 if (GM_getValue('menu_darkMode')) location.reload(); // 刷新网页
                 break;
